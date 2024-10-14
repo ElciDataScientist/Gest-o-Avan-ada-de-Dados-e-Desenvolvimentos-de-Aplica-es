@@ -1,0 +1,43 @@
+SELECT 
+    a.first_name,
+    a.last_name,
+    AVG(f.rental_duration) AS avg_rental_duration,
+    AVG(f.rental_rate) AS avg_rental_rate,
+    AVG(f.length) AS avg_length,
+    AVG(f.replacement_cost) AS avg_replacement_cost
+FROM 
+    actor a
+JOIN film_actor fa ON a.actor_id = fa.actor_id
+JOIN film f ON fa.film_id = f.film_id
+GROUP BY 
+    a.actor_id, a.first_name, a.last_name
+ORDER BY 
+    a.first_name, a.last_name;
+
+	SELECT 
+    c.first_name,
+    c.last_name,
+    c.email,
+    SUM(p.amount) AS total_amount
+FROM 
+    customer c
+JOIN payment p ON c.customer_id = p.customer_id
+GROUP BY 
+    c.customer_id, c.first_name, c.last_name, c.email
+ORDER BY 
+    total_amount DESC
+LIMIT 10;
+
+SELECT 
+    c.first_name,
+    c.last_name,
+    c.email,
+    SUM(p.amount) AS total_amount
+FROM 
+    customer c
+JOIN payment p ON c.customer_id = p.customer_id
+GROUP BY 
+    c.customer_id, c.first_name, c.last_name, c.email
+ORDER BY 
+    total_amount ASC
+LIMIT 10;
